@@ -5,16 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="Images/wand.png" />
   <title>Greetings</title>
-
-  <!-- Preload your optimized WebP images -->
-  <link rel="preload" href="Images/creepy.webp" as="image">
-  <link rel="preload" href="Images/HandLeft.png" as="image">
-  <link rel="preload" href="Images/HandRight.png" as="image">
-
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-
   <style>
     :root {
       --bg: #ffffff;
@@ -25,6 +17,7 @@
       --toggle-bg: #e5e5e5;
       --shadow: rgba(0, 0, 0, 0.1);
     }
+
     [data-theme="dark"] {
       --bg: #060606;
       --text: #ffffff;
@@ -34,7 +27,13 @@
       --toggle-bg: #111111;
       --shadow: rgba(255, 255, 255, 0.1);
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       background: var(--bg);
       color: var(--text);
@@ -45,25 +44,46 @@
       align-items: center;
       overflow: hidden;
     }
+
     .page {
-      position: absolute; top: 0; left: 0;
-      width: 100%; height: 100vh;
-      display: flex; justify-content: center; align-items: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    .hidden { display: none; }
+
+    .hidden {
+      display: none;
+    }
+
     .fade-overlay {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: black; opacity: 0;
-      pointer-events: none; z-index: 9999;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 9999;
       transition: opacity 1s ease-in-out;
     }
+
     .fade-overlay.active {
-      opacity: 1; pointer-events: auto;
+      opacity: 1;
+      pointer-events: auto;
     }
+
     .theme-toggle {
-      position: absolute; top: 30px; right: 30px;
-      width: 60px; height: 30px;
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      width: 60px;
+      height: 30px;
       background: var(--toggle-bg);
       border: 2px solid var(--border);
       border-radius: 25px;
@@ -72,110 +92,182 @@
       box-shadow: 0 2px 10px var(--shadow);
       z-index: 1000;
     }
+
     .theme-toggle::before {
       content: "";
-      position: absolute; top: 2px; left: 2px;
-      width: 22px; height: 22px;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 22px;
+      height: 22px;
       background: var(--border);
       border-radius: 50%;
       transition: transform 0.3s ease;
     }
+
     [data-theme="dark"] .theme-toggle::before {
       transform: translateX(28px);
     }
+
     .toggle-icons {
-      position: absolute; top: 50%; left: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%);
-      display: flex; justify-content: space-between;
+      display: flex;
+      justify-content: space-between;
       width: calc(100% - 12px);
       pointer-events: none;
     }
+
     .icon {
-      width: 14px; height: 14px; opacity: 0.7;
+      width: 14px;
+      height: 14px;
+      opacity: 0.7;
       transition: opacity 0.3s ease;
     }
+
     [data-theme="light"] .sun-icon,
-    [data-theme="dark"]  .moon-icon {
+    [data-theme="dark"] .moon-icon {
       opacity: 1;
     }
-    .search-wrapper { position: relative; }
-    .gif-character {
-      position: absolute; top: -70px; left: 18px;
-      width: 71px; pointer-events: none;
+
+    .search-wrapper {
+      position: relative;
     }
+
+    .gif-character {
+      position: absolute;
+      top: -70px;
+      left: 18px;
+      width: 71px;
+      pointer-events: none;
+    }
+
     .input-container {
-      display: flex; align-items: center;
+      display: flex;
+      align-items: center;
       background: var(--input-bg);
       border: 2px solid var(--border);
       border-radius: 50px;
     }
+
     .name-input {
-      border: none; outline: none;
-      padding: 15px 30px; font-size: 20px;
-      background: transparent; color: var(--text);
-      width: 300px; font-family: inherit;
+      border: none;
+      outline: none;
+      padding: 15px 30px;
+      font-size: 20px;
+      background: transparent;
+      color: var(--text);
+      width: 300px;
+      font-family: inherit;
     }
+
     .name-input::placeholder {
       color: var(--placeholder);
     }
+
     .submit-btn {
       background: #a11b31;
       border: 2px solid var(--border);
       border-radius: 50%;
-      width: 50px; height: 50px;
-      margin: 5px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: transform 0.2s ease;
     }
-    .submit-btn:hover { transform: scale(1.05); }
+
+    .submit-btn:hover {
+      transform: scale(1.05);
+    }
 
     .greeting-page {
-      background: #1a1a1a url("Images/creepy.webp") center/cover no-repeat;
+      background: #1a1a1a url("Images/creepy.webp") center center / cover no-repeat;
       color: white;
       flex-direction: column;
-      position: relative;
       text-align: center;
+      justify-content: center;
+      align-items: center;
+      position: relative;
     }
+
     .greeting-page::before {
-      content: ""; position: absolute; inset: 0;
-      background: rgba(0,0,0,0.3); z-index: 1;
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1;
     }
+
     .greeting-content {
-      position: relative; z-index: 2;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: flex-start;
-      padding-top: 80px; height: 100vh;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 80px;
+      height: 100vh;
     }
+
     .greeting-text {
       font-family: "IM Fell English", serif;
-      font-size: 64px; font-weight: 700;
+      font-size: 64px;
+      font-weight: 700;
       color: #edebeb;
-      text-shadow: 3px 3px 6px rgba(0,0,0,0.9);
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
       animation: fadeInText 2s ease-in-out;
       margin-bottom: 20px;
-      display: flex; align-items: center; gap: 12px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
     }
+
     @keyframes fadeInText {
-      from { opacity: 0; transform: translateY(-20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @media (max-width: 480px) {
-      .theme-toggle { top: 20px; right: 20px; }
-      .name-input {
-        width: 250px; font-size: 18px; padding: 12px 25px;
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
       }
-      .greeting-text { font-size: 42px; padding: 0 20px; }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .theme-toggle {
+        top: 20px;
+        right: 20px;
+      }
+
+      .name-input {
+        width: 250px;
+        font-size: 18px;
+        padding: 12px 25px;
+      }
+
+      .greeting-text {
+        font-size: 42px;
+        padding: 0 20px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()" tabindex="0" onkeydown="handleKeydown(event)">
     <div class="toggle-icons">
+      <!-- sun and moon icons -->
       <svg class="icon sun-icon" viewBox="0 0 24 24" fill="currentColor">
-        <!-- sun icon path -->
+        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
       </svg>
       <svg class="icon moon-icon" viewBox="0 0 24 24" fill="currentColor">
-        <!-- moon icon path -->
+        <path d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/>
       </svg>
     </div>
   </div>
@@ -188,7 +280,9 @@
       <div class="input-container">
         <input type="text" class="name-input" id="nameInput" placeholder="Enter your Name" />
         <button type="submit" class="submit-btn" onclick="submitName()">
-          <!-- arrow icon -->
+          <svg width="25" height="25" viewBox="0 0 24 24" fill="none">
+            <path d="M3 12H20M20 12L13 5M20 12L13 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </button>
       </div>
     </div>
@@ -205,27 +299,29 @@
       const current = document.documentElement.getAttribute('data-theme');
       document.documentElement.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
     }
+
     function handleKeydown(e) {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         toggleTheme();
       }
     }
+
     function submitName() {
       const name = document.getElementById('nameInput').value.trim();
       if (!name) return;
+
       const inputPage = document.getElementById('input-page');
       const greetingPage = document.getElementById('greeting-page');
       const themeToggle = document.getElementById('themeToggle');
       const fadeOverlay = document.getElementById('fadeOverlay');
 
-      document.getElementById('greetingText').innerHTML = `
-        <img src="Images/HandLeft.webp" alt="gesture" style="height: 90px; vertical-align: middle; margin-left: 10px;">
-        Lauda lele ${name}
-        <img src="Images/HandRight.webp" alt="gesture" style="height: 90px; vertical-align: middle;">
+      // Inline image in greeting text
+      document.getElementById('greetingText').innerHTML = `<img src="Images/HandLeft.png" alt="gesture" style="height: 90px; vertical-align: middle; margin-left: 10px;"> Lauda lele ${name}<img src="Images/HandRight.png" alt="gesture" style="height: 90px; vertical-align: middle; margin-left: 0px;">
       `;
 
       fadeOverlay.classList.add('active');
+
       setTimeout(() => {
         inputPage.classList.add('hidden');
         greetingPage.classList.remove('hidden');
@@ -233,9 +329,11 @@
         fadeOverlay.classList.remove('active');
       }, 1000);
     }
-    document.getElementById('nameInput').addEventListener('keypress', e => {
+
+    document.getElementById('nameInput').addEventListener('keypress', function (e) {
       if (e.key === 'Enter') submitName();
     });
+
     document.documentElement.setAttribute('data-theme', 'light');
   </script>
 </body>
